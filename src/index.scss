@@ -1,3 +1,18 @@
+// // config
+// @import './styles/fonts.scss';
+// @import './styles/vars.scss';
+// @import './styles/reset.scss';
+// @import './styles/aspect-ratio.scss';
+// @import './styles/base.scss';
+// @import './styles/type.scss';
+// @import './styles/container.scss';
+// @import './styles/button.scss';
+
+// // components
+// @import './components/button-slider-open/button-slider-open.scss';
+// @import './components/content/content.scss';
+// @import './components/placeholders/placeholders.scss';
+// @import './components/slider/slider.scss';
 
 
 * {
@@ -5,29 +20,23 @@
   }
   
   body {
-
+    height: 100vh;
     overflow: hidden;
     background: #000;
     color: #fff;  
     font-family: 'Playfair Display', cursive;
-    
-  }
-  .b--hero-a{
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    &__item{
-        
-    }
   }
+  
   .menu {
     overflow: hidden;
     cursor: grab;
     width: 100%;
     position: relative;
     z-index: 1;
-    height: 50vh;
+    height: 40vh;
     
     &.is-dragging {
       cursor: grabbing;
@@ -107,3 +116,41 @@
     }
   }
   
+  .version {
+    display: inline-block;
+    position: fixed;
+    text-align: center;
+    z-index: 1;
+    text-decoration: none;
+    background: #333;
+    font-family: sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 10px;
+    box-shadow: 0 8px 10px -5px rgba(0, 0, 0, .2);
+    top: -30px;
+    right: -50px;
+    bottom: auto;
+    transform: rotate(45deg);
+    transform-origin: 0% 100%;
+    border-radius: 0;
+    padding: 8px 30px;
+    font-size: 11px;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 100px;
+      bottom: 0;
+      right: 0%;
+      background: transparent;
+    }
+    
+    @media (max-width: 767px) {
+      transform: scale(.6) rotate(45deg) ;
+      right: -100px;
+    }
+  }

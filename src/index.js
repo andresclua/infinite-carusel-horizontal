@@ -55,7 +55,7 @@ class InfiniteCaruselHorizontal{
         const handleTouchStart = (e) => {
             this.touchStart = e.clientX || e.touches[0].clientX
             this.isDragging = true
-            this.JSUTIL.addClass(this.DOM.menu,'is-dragging')
+            this.JSUTIL.addClass(this.DOM.menu,'--is-dragging')
 
         }
         const handleTouchMove = (e) => {
@@ -66,7 +66,7 @@ class InfiniteCaruselHorizontal{
         }
         const handleTouchEnd = () => {
             this.isDragging = false
-            this.JSUTIL.removeClass(this.DOM.menu,'is-dragging')
+            this.JSUTIL.removeClass(this.DOM.menu,'--is-dragging')
         }
 
         
@@ -94,13 +94,13 @@ class InfiniteCaruselHorizontal{
     fireScroll = (scroll) => {
         gsap.set(this.DOM.items, {
             x: (i) => {
-            return i * this.itemWidth + scroll
+                return i * this.itemWidth + scroll
             },
             modifiers: {
-            x: (x, target) => {
-                const s = gsap.utils.wrap(-this.itemWidth, this.wrapWidth - this.itemWidth, parseInt(x))
-                return `${s}px`
-            }
+                x: (x, target) => {
+                    const s = gsap.utils.wrap(-this.itemWidth, this.wrapWidth - this.itemWidth, parseInt(x))
+                    return `${s}px`
+                }
             }
         })
     } 
@@ -121,7 +121,5 @@ class InfiniteCaruselHorizontal{
 }
 export default InfiniteCaruselHorizontal;
 new InfiniteCaruselHorizontal()
-/*--------------------
-Vars
---------------------*/
+
 

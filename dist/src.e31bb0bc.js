@@ -5184,7 +5184,7 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
       var handleTouchStart = function handleTouchStart(e) {
         _this2.touchStart = e.clientX || e.touches[0].clientX;
         _this2.isDragging = true;
-        _this2.JSUTIL.addClass(_this2.DOM.menu, 'is-dragging');
+        _this2.JSUTIL.addClass(_this2.DOM.menu, '--is-dragging');
       };
       var handleTouchMove = function handleTouchMove(e) {
         if (!_this2.isDragging) return;
@@ -5194,7 +5194,7 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
       };
       var handleTouchEnd = function handleTouchEnd() {
         _this2.isDragging = false;
-        _this2.JSUTIL.removeClass(_this2.DOM.menu, 'is-dragging');
+        _this2.JSUTIL.removeClass(_this2.DOM.menu, '--is-dragging');
       };
 
       // 👂 Evennt Listeners
@@ -5240,9 +5240,6 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
 var _default = InfiniteCaruselHorizontal;
 exports.default = _default;
 new InfiniteCaruselHorizontal();
-/*--------------------
-Vars
---------------------*/
 },{"./index.scss":"index.scss","@andresclua/jsutil":"../node_modules/@andresclua/jsutil/index.js","gsap":"../node_modules/gsap/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
