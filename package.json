@@ -1,8 +1,8 @@
 {
-  "name": "codrops-tutorial",
+  "name": "infinite-carusel-horizontal",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Ruud Luijten",
+  "author": "Andres Clua",
   "license": "MIT",
   "scripts": {
     "dev": "parcel -p 3000 ./src/index.html",
