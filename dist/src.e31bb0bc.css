@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: "Playfair Display", cursive;
+}
+
+.b--hero-a {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu {
+  overflow: hidden;
+  cursor: grab;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  height: 50vh;
+}
+.menu.is-dragging {
+  cursor: grabbing;
+}
+.menu--wrapper {
+  counter-reset: count;
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.menu--item {
+  counter-increment: count;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 30vw;
+  height: 100%;
+  padding: 0 1.5vw;
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  .menu--item {
+    width: 40vw;
+    height: 40vw;
+  }
+}
+.menu--item:nth-child(n+10):before {
+  content: counter(count);
+}
+.menu--item figure {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  user-select: none;
+  -webkit-appearance: none;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  transform-origin: center;
+}
+.menu--item figure img {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+  transform-origin: center;
+}
+.menu--item figure:before {
+  position: absolute;
+  z-index: 2;
+  bottom: 1vw;
+  left: 1vw;
+  display: inline-block;
+  content: "0" counter(count);
+  color: #ffffff;
+  font-size: 3vw;
+}
+
+/*# sourceMappingURL=/src.e31bb0bc.css.map */
