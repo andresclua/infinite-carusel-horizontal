@@ -92,7 +92,7 @@ class InfiniteCaruselHorizontal{
             this.wrapWidth = this.DOM.items.length * this.itemWidth
         })
     }
-    fireScroll = (scroll) => {
+    fireScroll(scroll) {
         gsap.set(this.DOM.items, {
             x: (i) => {
                 return i * this.itemWidth + scroll

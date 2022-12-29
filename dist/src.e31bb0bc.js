@@ -5112,7 +5112,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 // OG - https://codepen.io/supah/pen/VwegJwV
@@ -5122,21 +5121,7 @@ var lerp = function lerp(v0, v1, t) {
 };
 var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
   function InfiniteCaruselHorizontal() {
-    var _this = this;
     _classCallCheck(this, InfiniteCaruselHorizontal);
-    _defineProperty(this, "fireScroll", function (scroll) {
-      _gsap.default.set(_this.DOM.items, {
-        x: function x(i) {
-          return i * _this.itemWidth + scroll;
-        },
-        modifiers: {
-          x: function x(_x, target) {
-            var s = _gsap.default.utils.wrap(-_this.itemWidth, _this.wrapWidth - _this.itemWidth, parseInt(_x));
-            return "".concat(s, "px");
-          }
-        }
-      });
-    });
     /**
      * Dom Elements
      */
@@ -5175,27 +5160,27 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
   }, {
     key: "events",
     value: function events() {
-      var _this2 = this;
+      var _this = this;
       // 🛞 Event
       var handleMouseWheel = function handleMouseWheel(e) {
-        _this2.scrollY -= e.deltaY * 0.9;
+        _this.scrollY -= e.deltaY * 0.9;
       };
 
       // ✊ Events
       var handleTouchStart = function handleTouchStart(e) {
-        _this2.touchStart = e.clientX || e.touches[0].clientX;
-        _this2.isDragging = true;
-        _this2.JSUTIL.addClass(_this2.DOM.menu, _this2.dragActiveClass);
+        _this.touchStart = e.clientX || e.touches[0].clientX;
+        _this.isDragging = true;
+        _this.JSUTIL.addClass(_this.DOM.menu, _this.dragActiveClass);
       };
       var handleTouchMove = function handleTouchMove(e) {
-        if (!_this2.isDragging) return;
-        _this2.touchX = e.clientX || e.touches[0].clientX;
-        _this2.scrollY += (_this2.touchX - _this2.touchStart) * 2.5;
-        _this2.touchStart = _this2.touchX;
+        if (!_this.isDragging) return;
+        _this.touchX = e.clientX || e.touches[0].clientX;
+        _this.scrollY += (_this.touchX - _this.touchStart) * 2.5;
+        _this.touchStart = _this.touchX;
       };
       var handleTouchEnd = function handleTouchEnd() {
-        _this2.isDragging = false;
-        _this2.JSUTIL.removeClass(_this2.DOM.menu, _this2.dragActiveClass);
+        _this.isDragging = false;
+        _this.JSUTIL.removeClass(_this.DOM.menu, _this.dragActiveClass);
       };
 
       // 👂 Evennt Listeners
@@ -5213,9 +5198,25 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
 
       // resize
       window.addEventListener('resize', function () {
-        _this2.menuWidth = _this2.DOM.menu.clientWidth;
-        _this2.itemWidth = _this2.DOM.items[0].clientWidth;
-        _this2.wrapWidth = _this2.DOM.items.length * _this2.itemWidth;
+        _this.menuWidth = _this.DOM.menu.clientWidth;
+        _this.itemWidth = _this.DOM.items[0].clientWidth;
+        _this.wrapWidth = _this.DOM.items.length * _this.itemWidth;
+      });
+    }
+  }, {
+    key: "fireScroll",
+    value: function fireScroll(scroll) {
+      var _this2 = this;
+      _gsap.default.set(this.DOM.items, {
+        x: function x(i) {
+          return i * _this2.itemWidth + scroll;
+        },
+        modifiers: {
+          x: function x(_x, target) {
+            var s = _gsap.default.utils.wrap(-_this2.itemWidth, _this2.wrapWidth - _this2.itemWidth, parseInt(_x));
+            return "".concat(s, "px");
+          }
+        }
       });
     }
   }, {

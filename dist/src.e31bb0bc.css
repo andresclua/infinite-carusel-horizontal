@@ -46,12 +46,14 @@ body {
   padding: 0 1.5vw;
   overflow: hidden;
 }
-.b--card-b figure {
-  position: absolute;
+.b--card-b:hover {
+  opacity: 0.3;
+}
+.b--card-b__wrapper {
+  position: relative;
   z-index: 1;
   display: block;
   user-select: none;
-  -webkit-appearance: none;
   padding: 0;
   border: none;
   outline: none;
@@ -60,19 +62,29 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  pointer-events: none;
   transform-origin: center;
 }
-.b--card-b figure img {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
+.b--card-b__wrapper__link {
+  display: block;
   height: 100%;
-  object-fit: cover;
-  vertical-align: middle;
-  transform-origin: center;
+  position: relative;
+  color: white;
+}
+.b--card-b__wrapper__link__bg-items {
+  background-position: cover;
+  height: 100%;
+  z-index: 1;
+}
+.b--card-b__wrapper__link__ft-items {
+  position: absolute;
+  z-index: 10;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+}
+.b--card-b__wrapper__link__ft-items__title {
+  margin: 0;
+  padding: 0;
 }
 
 /*# sourceMappingURL=/src.e31bb0bc.css.map */

@@ -68,36 +68,48 @@
     padding: 0 1.5vw;
     overflow: hidden;
     
+    &:hover{
+        opacity: .3;
+    }
     
-    figure {
-      position: absolute;
-      z-index: 1;
-      display: block;
-      user-select: none;
-      -webkit-appearance: none;
-      padding: 0;
-      border: none;
-      outline: none;
-      box-shadow: none;
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      pointer-events: none;
-      transform-origin: center;
-      
-      img {
-        position: absolute;
+    &__wrapper{
+        // pointer-events: none;
+        position: relative;
         z-index: 1;
-        top: 0;
-        left: 0;
+        display: block;
+        user-select: none;
+        padding: 0;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        cursor: pointer;
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        vertical-align: middle;
+        overflow: hidden;
         transform-origin: center;
-      }
-    
+
+        &__link{
+            display: block;
+            height: 100%;
+            position:relative;
+            color:white;
+            &__bg-items{
+                background-position:cover;
+                height: 100%;
+                z-index: 1;
+            }
+            &__ft-items{
+                position:absolute;
+                z-index: 10;
+                bottom:8px;
+                left:8px;
+                right:8px;
+                &__title{
+                    margin:0; padding:0
+                }
+            }
+        }
+        
       
     }
   }
