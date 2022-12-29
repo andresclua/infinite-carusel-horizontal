@@ -17,9 +17,9 @@ class InfiniteCaruselHorizontal{
          */
         this.JSUTIL = new JSUTIL()
         this.DOM ={
-            menu : document.querySelector('.menu'),
-            items : document.querySelectorAll('.menu--item'),
-            images: document.querySelectorAll('.menu--item img')
+            menu : document.querySelector('.js--ich'),
+            items : document.querySelectorAll('.b--card-b'),
+            images: document.querySelectorAll('.b--card-b img')
         }
 
         // Variables used Globally
@@ -37,6 +37,7 @@ class InfiniteCaruselHorizontal{
         this.touchStart = 0;
         this.touchX = 0;
         this.isDragging = false
+        this.dragActiveClass = 'b--hero-a__wrapper--is-dragging';
 
         this.init()
         this.events()
@@ -55,7 +56,7 @@ class InfiniteCaruselHorizontal{
         const handleTouchStart = (e) => {
             this.touchStart = e.clientX || e.touches[0].clientX
             this.isDragging = true
-            this.JSUTIL.addClass(this.DOM.menu,'--is-dragging')
+            this.JSUTIL.addClass(this.DOM.menu,this.dragActiveClass)
 
         }
         const handleTouchMove = (e) => {
@@ -66,7 +67,7 @@ class InfiniteCaruselHorizontal{
         }
         const handleTouchEnd = () => {
             this.isDragging = false
-            this.JSUTIL.removeClass(this.DOM.menu,'--is-dragging')
+            this.JSUTIL.removeClass(this.DOM.menu,this.dragActiveClass)
         }
 
         

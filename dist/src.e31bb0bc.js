@@ -5142,9 +5142,9 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
      */
     this.JSUTIL = new _jsutil.default();
     this.DOM = {
-      menu: document.querySelector('.menu'),
-      items: document.querySelectorAll('.menu--item'),
-      images: document.querySelectorAll('.menu--item img')
+      menu: document.querySelector('.js--ich'),
+      items: document.querySelectorAll('.b--card-b'),
+      images: document.querySelectorAll('.b--card-b img')
     };
 
     // Variables used Globally
@@ -5162,6 +5162,7 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
     this.touchStart = 0;
     this.touchX = 0;
     this.isDragging = false;
+    this.dragActiveClass = 'b--hero-a__wrapper--is-dragging';
     this.init();
     this.events();
   }
@@ -5184,7 +5185,7 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
       var handleTouchStart = function handleTouchStart(e) {
         _this2.touchStart = e.clientX || e.touches[0].clientX;
         _this2.isDragging = true;
-        _this2.JSUTIL.addClass(_this2.DOM.menu, '--is-dragging');
+        _this2.JSUTIL.addClass(_this2.DOM.menu, _this2.dragActiveClass);
       };
       var handleTouchMove = function handleTouchMove(e) {
         if (!_this2.isDragging) return;
@@ -5194,7 +5195,7 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
       };
       var handleTouchEnd = function handleTouchEnd() {
         _this2.isDragging = false;
-        _this2.JSUTIL.removeClass(_this2.DOM.menu, '--is-dragging');
+        _this2.JSUTIL.removeClass(_this2.DOM.menu, _this2.dragActiveClass);
       };
 
       // 👂 Evennt Listeners
