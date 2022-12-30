@@ -21,7 +21,7 @@ body {
   width: 100%;
   position: relative;
   z-index: 1;
-  height: 40vh;
+  height: 80vh;
 }
 .b--hero-a__wrapper--is-dragging {
   cursor: grabbing;
@@ -71,7 +71,8 @@ body {
   color: white;
 }
 .b--card-b__wrapper__link__bg-items {
-  background-position: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
   height: 100%;
   z-index: 1;
 }

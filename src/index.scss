@@ -38,7 +38,7 @@
         width: 100%;
         position: relative;
         z-index: 1;
-        height: 40vh;
+        height: 80vh;
 
         &--is-dragging {
             cursor: grabbing;
@@ -65,7 +65,7 @@
     left: 0;
     width: 30vw;
     height: 100%;
-    padding: 0 1.5vw;
+    padding: 0 1.5vw; // < ! -- this is new, check with alma / Meche
     overflow: hidden;
     
     &:hover{
@@ -94,7 +94,8 @@
             position:relative;
             color:white;
             &__bg-items{
-                background-position:cover;
+                background-size:cover;
+                background-repeat: no-repeat;
                 height: 100%;
                 z-index: 1;
             }
