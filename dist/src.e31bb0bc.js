@@ -5114,8 +5114,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-// OG - https://codepen.io/supah/pen/VwegJwV
-
 var lerp = function lerp(v0, v1, t) {
   return v0 * (1 - t) + v1 * t;
 };
@@ -5128,8 +5126,7 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
     this.JSUTIL = new _jsutil.default();
     this.DOM = {
       menu: document.querySelector('.js--ich'),
-      items: document.querySelectorAll('.b--card-b'),
-      images: document.querySelectorAll('.b--card-b img')
+      items: document.querySelectorAll('.b--card-b')
     };
 
     // Variables used Globally
@@ -5212,6 +5209,7 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
           return i * _this2.itemWidth + scroll;
         },
         modifiers: {
+          // infinite
           x: function x(_x, target) {
             var s = _gsap.default.utils.wrap(-_this2.itemWidth, _this2.wrapWidth - _this2.itemWidth, parseInt(_x));
             return "".concat(s, "px");
@@ -5223,12 +5221,13 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
     key: "RAF",
     value: function RAF() {
       var _this3 = this;
-      this.y = lerp(this.y, this.scrollY, .1);
+      this.y = lerp(this.y, this.scrollY, .5);
       this.fireScroll(this.y);
       this.scrollSpeed = this.y - this.oldScrollY;
       this.oldScrollY = this.y;
       _gsap.default.to(this.DOM.items, {
-        skewX: -this.scrollSpeed * .02,
+        y: this.scrollSpeed * .002,
+        skewX: -this.scrollSpeed * .002,
         rotate: this.scrollSpeed * .01,
         scale: 1 - Math.min(100, Math.abs(this.scrollSpeed)) * 0.003
       });
@@ -5267,7 +5266,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50777" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49678" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -3,9 +3,6 @@ import './index.scss'
 import JSUTIL from '@andresclua/jsutil';
 import gsap from 'gsap';
 
-// OG - https://codepen.io/supah/pen/VwegJwV
-
-
 const lerp = (v0, v1, t) => {
     return v0 * ( 1 - t ) + v1 * t
 }
@@ -19,7 +16,6 @@ class InfiniteCaruselHorizontal{
         this.DOM ={
             menu : document.querySelector('.js--ich'),
             items : document.querySelectorAll('.b--card-b'),
-            images: document.querySelectorAll('.b--card-b img')
         }
 
         // Variables used Globally
@@ -98,6 +94,7 @@ class InfiniteCaruselHorizontal{
                 return i * this.itemWidth + scroll
             },
             modifiers: {
+                // infinite
                 x: (x, target) => {
                     const s = gsap.utils.wrap(-this.itemWidth, this.wrapWidth - this.itemWidth, parseInt(x))
                     return `${s}px`
@@ -106,14 +103,15 @@ class InfiniteCaruselHorizontal{
         })
     } 
     RAF() {
-            this.y = lerp(this.y, this.scrollY, .1)
+            this.y = lerp(this.y, this.scrollY, .5)
             this.fireScroll(this.y)
         
             this.scrollSpeed = this.y - this.oldScrollY
             this.oldScrollY = this.y
         
             gsap.to(this.DOM.items, {
-                skewX: -this.scrollSpeed * .02,
+                y: this.scrollSpeed * .002,
+                skewX: -this.scrollSpeed * .002,
                 rotate: this.scrollSpeed * .01,
                 scale: 1 - Math.min(100, Math.abs(this.scrollSpeed)) * 0.003
             })

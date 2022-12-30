@@ -69,8 +69,11 @@ body {
   height: 100%;
   position: relative;
   color: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
 .b--card-b__wrapper__link__bg-items {
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;

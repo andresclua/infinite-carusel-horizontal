@@ -93,7 +93,10 @@
             height: 100%;
             position:relative;
             color:white;
+            border-radius: 8px;
+            overflow: hidden;
             &__bg-items{
+                background-position:center;
                 background-size:cover;
                 background-repeat: no-repeat;
                 height: 100%;
