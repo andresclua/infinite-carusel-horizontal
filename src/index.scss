@@ -1,119 +1,225 @@
-// // config
-// @import './styles/fonts.scss';
-// @import './styles/vars.scss';
-// @import './styles/reset.scss';
-// @import './styles/aspect-ratio.scss';
-// @import './styles/base.scss';
-// @import './styles/type.scss';
-// @import './styles/container.scss';
-// @import './styles/button.scss';
+/**
+    main vars
+**/    
 
-// // components
-// @import './components/button-slider-open/button-slider-open.scss';
-// @import './components/content/content.scss';
-// @import './components/placeholders/placeholders.scss';
-// @import './components/slider/slider.scss';
+/* measure */
+$measure: 8px;
 
+/* core Colors */
+$color-a: #0A0A0A;
+$color-b: #fff;
+$color-c: #FCEC4F;
+$color-d: #ED7167;
+$color-e: #CFFF00;
+$color-f: #F78566;
+$color-g: #F39507;
+$color-h: #E3BD74;
+
+
+$color-options: (
+  a: $color-a,
+  b: $color-b,
+  c: $color-c,
+  d: $color-d,
+  e: $color-e,
+  f: $color-f,
+  g: $color-g,
+  h: $color-h
+);
+
+$colorbg-options: (
+  a: $color-a,
+);
+
+/* breakpoints */
+$all: 0;
+$desktop: 1700px;
+$laptop: 1570px;
+$tabletl: 1300px;
+$tabletm: 1024px;
+$tablets: 810px;
+$mobile: 580px;
+$viewport-type: max-width;
+$breakpoints-grid: (
+  all: $all,
+  desktop: $desktop,
+  laptop: $laptop,
+  tabletl: $tabletl,
+  tabletm: $tabletm,
+  tablets: $tablets,
+  mobile: $mobile,
+) !default;
+
+/* typography */
+$type-a: "Montserrat", sans-serif;
+$type-b: "Outfit", sans-serif;
+
+/* time and transitions */
+$time-a: 0.3s;
+$time-b: 0.6s;
+$time-c: 0.9s;
+$ease-standard-b: cubic-bezier(0, 0, 0.3, 1); //expresive
+
+/* border radius */
+$border-radius-a: 8px;
+
+/* fonts mixins */
+@mixin make-font-e($weight: 600) {
+    text-transform: uppercase;
+    font-family: $type-a;
+    font-weight: $weight;
+    letter-spacing: 0.02em;
+    line-height: 120%;
+    font-size: 1.875rem;
+}
+
+@mixin make-font-h($weight: 500) {
+    font-family: $type-b;
+    font-weight: $weight;
+    line-height: 150%;
+    font-size: 1.25rem;
+    @media all and ($viewport-type: $mobile){
+      font-size: 1.125rem;
+    } 
+}
 
 * {
     box-sizing: border-box;
-  }
+}
   
-  body {
+body {
+    @include make-font-h(200);
     overflow: hidden;
-    background: #000;
-    color: #fff;  
-    font-family: 'Playfair Display', cursive;
-  }
+    background-color: map-get($colorbg-options, a);
+    color: map-get($color-options, b);
+}
 
-  .b--hero-a{
+// hero a
+.b--hero-a {
+    position: relative;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-
-    &__wrapper{
-        overflow: hidden;
-        cursor: grab;
-        width: 100%;
+    scrollbar-width: none;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    // calc height with admin bar of mobile devices using JS
+    @media all and ($viewport-type:$tablets) {
+        height: calc(var(--vh, 1vh) * 100);
+        overscroll-behavior: none;
+    }
+    &__wrapper {
         position: relative;
+        height: 65vh;
+        width: 100%;
+        overflow: hidden;
         z-index: 1;
-        height: 80vh;
-
+        cursor: grab;
+        &::-webkit-scrollbar{
+            display: none;
+        }
         &--is-dragging {
             cursor: grabbing;
         }
-        &__content{
-            display: flex;
+        @media all and ($viewport-type:$mobile) {
+            height: 50vh;
+            align-items: flex-end; 
+        }
+        &__content {
             position: absolute;
-            z-index: 1;
-            height: 100%;
             top: 0;
             left: 0;
-            width: 100%;
+            display: flex;
+            height: 100%;
+            width: fit-content;
+            padding-right: $measure * 4;
+            z-index: 1;
+            &:last-child {
+                padding-right: 0;
+            }
+            
         }
-    }
-  }
-  
+    } 
+}
 
-  
-  
-  .b--card-b {
+// card b
+.b--card-b {
     position: absolute;
-    z-index: 1;
     top: 0;
     left: 0;
-    width: 30vw;
+    width: 25vw;
     height: 100%;
-    padding: 0 1.5vw; // < ! -- this is new, check with alma / Meche
+    color: #fff;
+    text-decoration: none;
+    padding: 0 $measure * 2;
+    background-size: cover;
     overflow: hidden;
-    
-    &:hover{
-        opacity: .3;
+    z-index: 1;
+    transition: opacity $time-a $ease-standard-b;
+    @media all and ($viewport-type:$tabletl) {
+        width: 40vw;
     }
-    
-    &__wrapper{
-        // pointer-events: none;
+    @media all and ($viewport-type:$tabletm) {
+        width: 45vw;
+    }
+    @media all and ($viewport-type:$tablets) {
+        width: 70vw;
+    }
+    @media all and ($viewport-type:$mobile) {
+        width: 85vw;
+    }
+    &__wrapper {
         position: relative;
-        z-index: 1;
-        display: block;
+        display: flex;
+        align-items: flex-end;
         user-select: none;
-        padding: 0;
-        border: none;
-        outline: none;
-        box-shadow: none;
-        cursor: pointer;
+        padding: $measure * 4;
         width: 100%;
         height: 100%;
         overflow: hidden;
         transform-origin: center;
-
-        &__link{
-            display: block;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: $border-radius-a;
+        cursor: pointer;
+        z-index: 3;
+        &:before {
+            content: "";
+            position: absolute;
+            width: 100%;
             height: 100%;
-            position:relative;
-            color:white;
-            border-radius: 8px;
+            top: 0;
+            left: 0;
+            background: map-get($color-options, a);
+            opacity: 0;
+            transition: $time-b $ease-standard-b;
+            z-index: 2;
+        }
+        &__ft-items {
+            word-break: break-word;
+            transition: opacity $time-b $ease-standard-b;
+            z-index: 10;
             overflow: hidden;
-            &__bg-items{
-                background-position:center;
-                background-size:cover;
-                background-repeat: no-repeat;
-                height: 100%;
-                z-index: 1;
-            }
-            &__ft-items{
-                position:absolute;
-                z-index: 10;
-                bottom:8px;
-                left:8px;
-                right:8px;
-                &__title{
-                    margin:0; padding:0
-                }
+            &__title {
+                @include make-font-e();
+                text-transform: uppercase;
             }
         }
-        
-      
     }
-  }
+    &:hover & {
+        &__wrapper {
+            &:before {
+                opacity: 0.3;
+            }
+        }
+    }
+    &--is-touch & {
+        &__wrapper {
+            &:before {
+                opacity: 0.3 !important;
+            }
+        }
+    }
+}

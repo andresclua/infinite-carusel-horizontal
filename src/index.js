@@ -12,7 +12,7 @@ class InfiniteCaruselHorizontal{
         /**
          * Dom Elements
          */
-        this.JSUTIL = new JSUTIL()
+        this.jsUtil = new JSUTIL()
         this.DOM ={
             menu : document.querySelector('.js--ich'),
             items : document.querySelectorAll('.b--card-b'),
@@ -52,10 +52,11 @@ class InfiniteCaruselHorizontal{
         const handleTouchStart = (e) => {
             this.touchStart = e.clientX || e.touches[0].clientX
             this.isDragging = true
-            this.JSUTIL.addClass(this.DOM.menu,this.dragActiveClass)
+            this.jsUtil.addClass(this.DOM.menu,this.dragActiveClass)
 
         }
         const handleTouchMove = (e) => {
+            e.preventDefault(); // for iOS highjack
             if (!this.isDragging) return
             this.touchX = e.clientX || e.touches[0].clientX
             this.scrollY += (this.touchX - this.touchStart) * 2.5
@@ -63,12 +64,13 @@ class InfiniteCaruselHorizontal{
         }
         const handleTouchEnd = () => {
             this.isDragging = false
-            this.JSUTIL.removeClass(this.DOM.menu,this.dragActiveClass)
+            this.jsUtil.removeClass(this.DOM.menu,this.dragActiveClass)
         }
 
         
         // 👂 Evennt Listeners
         this.DOM.menu.addEventListener('mousewheel', handleMouseWheel)
+        this.DOM.menu.addEventListener('wheel', handleMouseWheel) // Firefox
 
         this.DOM.menu.addEventListener('touchstart', handleTouchStart)
         this.DOM.menu.addEventListener('touchmove', handleTouchMove)
@@ -103,22 +105,47 @@ class InfiniteCaruselHorizontal{
         })
     } 
     RAF() {
-            this.y = lerp(this.y, this.scrollY, .5)
+            // this.y = lerp(this.y, this.scrollY, .5)
+            this.y = lerp(this.y, this.scrollY, .1)
             this.fireScroll(this.y)
         
             this.scrollSpeed = this.y - this.oldScrollY
             this.oldScrollY = this.y
         
             gsap.to(this.DOM.items, {
-                y: this.scrollSpeed * .002,
-                skewX: -this.scrollSpeed * .002,
+                // y: this.scrollSpeed * .002,
+                // skewX: -this.scrollSpeed * .002,
+                // rotate: this.scrollSpeed * .01,
+                // scale: 1 - Math.min(100, Math.abs(this.scrollSpeed)) * 0.003
+                skewX: -this.scrollSpeed * .02,
                 rotate: this.scrollSpeed * .01,
                 scale: 1 - Math.min(100, Math.abs(this.scrollSpeed)) * 0.003
+
             })
             requestAnimationFrame(()=>{this.RAF()})
         }
 }
-export default InfiniteCaruselHorizontal;
-new InfiniteCaruselHorizontal()
+// export default InfiniteCaruselHorizontal;
+new InfiniteCaruselHorizontal();
+
+// calculate window height on mobile devices and set it trough css
+class TouchHeight {
+    constructor() {
+        this.DOM = {
+            hero: document.querySelector('.b--hero-a')
+        }
+        this.jsUtil = new JSUTIL();
+        this.init();
+    }
+
+    init() {
+        if(this.jsUtil.getTypeDevice("touch")) {
+            document.documentElement.style.setProperty('--vh', `${window.innerHeight/100}px`);
+        }
+    }
+}
+
+// export default TouchHeight;
+new TouchHeight();
 
 
