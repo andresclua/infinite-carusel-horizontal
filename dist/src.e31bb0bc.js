@@ -5100,10 +5100,6 @@ exports.default = exports.gsap = gsapWithCSS;
 },{"./gsap-core.js":"../node_modules/gsap/gsap-core.js","./CSSPlugin.js":"../node_modules/gsap/CSSPlugin.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
 require("./index.scss");
 var _jsutil = _interopRequireDefault(require("@andresclua/jsutil"));
 var _gsap = _interopRequireDefault(require("gsap"));
@@ -5123,7 +5119,7 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
     /**
      * Dom Elements
      */
-    this.JSUTIL = new _jsutil.default();
+    this.jsUtil = new _jsutil.default();
     this.DOM = {
       menu: document.querySelector('.js--ich'),
       items: document.querySelectorAll('.b--card-b')
@@ -5167,9 +5163,10 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
       var handleTouchStart = function handleTouchStart(e) {
         _this.touchStart = e.clientX || e.touches[0].clientX;
         _this.isDragging = true;
-        _this.JSUTIL.addClass(_this.DOM.menu, _this.dragActiveClass);
+        _this.jsUtil.addClass(_this.DOM.menu, _this.dragActiveClass);
       };
       var handleTouchMove = function handleTouchMove(e) {
+        e.preventDefault(); // for iOS highjack
         if (!_this.isDragging) return;
         _this.touchX = e.clientX || e.touches[0].clientX;
         _this.scrollY += (_this.touchX - _this.touchStart) * 2.5;
@@ -5177,11 +5174,13 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
       };
       var handleTouchEnd = function handleTouchEnd() {
         _this.isDragging = false;
-        _this.JSUTIL.removeClass(_this.DOM.menu, _this.dragActiveClass);
+        _this.jsUtil.removeClass(_this.DOM.menu, _this.dragActiveClass);
       };
 
       // 👂 Evennt Listeners
       this.DOM.menu.addEventListener('mousewheel', handleMouseWheel);
+      this.DOM.menu.addEventListener('wheel', handleMouseWheel); // Firefox
+
       this.DOM.menu.addEventListener('touchstart', handleTouchStart);
       this.DOM.menu.addEventListener('touchmove', handleTouchMove);
       this.DOM.menu.addEventListener('touchend', handleTouchEnd);
@@ -5221,13 +5220,17 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
     key: "RAF",
     value: function RAF() {
       var _this3 = this;
-      this.y = lerp(this.y, this.scrollY, .5);
+      // this.y = lerp(this.y, this.scrollY, .5)
+      this.y = lerp(this.y, this.scrollY, .1);
       this.fireScroll(this.y);
       this.scrollSpeed = this.y - this.oldScrollY;
       this.oldScrollY = this.y;
       _gsap.default.to(this.DOM.items, {
-        y: this.scrollSpeed * .002,
-        skewX: -this.scrollSpeed * .002,
+        // y: this.scrollSpeed * .002,
+        // skewX: -this.scrollSpeed * .002,
+        // rotate: this.scrollSpeed * .01,
+        // scale: 1 - Math.min(100, Math.abs(this.scrollSpeed)) * 0.003
+        skewX: -this.scrollSpeed * .02,
         rotate: this.scrollSpeed * .01,
         scale: 1 - Math.min(100, Math.abs(this.scrollSpeed)) * 0.003
       });
@@ -5237,10 +5240,30 @@ var InfiniteCaruselHorizontal = /*#__PURE__*/function () {
     }
   }]);
   return InfiniteCaruselHorizontal;
-}();
-var _default = InfiniteCaruselHorizontal;
-exports.default = _default;
+}(); // export default InfiniteCaruselHorizontal;
 new InfiniteCaruselHorizontal();
+
+// calculate window height on mobile devices and set it trough css
+var TouchHeight = /*#__PURE__*/function () {
+  function TouchHeight() {
+    _classCallCheck(this, TouchHeight);
+    this.DOM = {
+      hero: document.querySelector('.b--hero-a')
+    };
+    this.jsUtil = new _jsutil.default();
+    this.init();
+  }
+  _createClass(TouchHeight, [{
+    key: "init",
+    value: function init() {
+      if (this.jsUtil.getTypeDevice("touch")) {
+        document.documentElement.style.setProperty('--vh', "".concat(window.innerHeight / 100, "px"));
+      }
+    }
+  }]);
+  return TouchHeight;
+}(); // export default TouchHeight;
+new TouchHeight();
 },{"./index.scss":"index.scss","@andresclua/jsutil":"../node_modules/@andresclua/jsutil/index.js","gsap":"../node_modules/gsap/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -5266,7 +5289,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49678" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49550" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
