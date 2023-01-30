@@ -46,6 +46,8 @@ class InfiniteCaruselHorizontal{
         // 🛞 Event
         const handleMouseWheel = (e) => {
             this.scrollY -= e.deltaY * 0.9
+            // * allow horizontal scroll on touchpad *
+            // this.scrollY -= e.deltaY * 0.9 || e.deltaX * 0.9
         }
         
         // ✊ Events
